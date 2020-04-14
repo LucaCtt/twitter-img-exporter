@@ -1,0 +1,9 @@
+# VS code
+
+.vscode
+
+# Binary
+/twitter-img-exporter
+
+# Config
+/config.yaml
