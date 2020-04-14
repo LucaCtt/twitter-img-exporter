@@ -19,14 +19,14 @@ type DirImgDst struct {
 
 // Write writes the images to a local directory.
 func (d *DirImgDst) Write(imgs []Img) error {
+	// Create dir
+	if err := os.MkdirAll(d.Dir, os.ModePerm); err != nil {
+		return fmt.Errorf("Create directory \"%s\" failed: %w", d.Dir, err)
+	}
+
 	for i := 0; i < len(imgs); i++ {
 		img := imgs[i]
 		defer img.Content.Close()
-
-		// Create dir
-		if err := os.MkdirAll(d.Dir, os.ModePerm); err != nil {
-			return fmt.Errorf("Create directory \"%s\" failed: %w", d.Dir, err)
-		}
 
 		file := filepath.Join(d.Dir, img.Name)
 
